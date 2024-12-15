@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <!-- Banner -->
+  {{ with .Params.banner }}
+    <section class="section pt-14">
+      <div class="container">
+        <div class="row justify-center translate-y-3/4">
+          <div class="lg:col-7 md:col-9 mb-8 text-start">
+            <h1 class="text-3xl font-bold dark:text-white lg:text-5xl">
+              {{ .title | markdownify }}
+            </h1>
+            <p class="my-2 text-lg lg:my-4 lg:text-2xl">
+              {{ .content | markdownify }}
+            </p>
+            <p class="font-light lg:text-xl">
+              {{ .description | markdownify }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  <!-- /Banner -->
+{{ end }}
