@@ -2,9 +2,10 @@
   <!-- Banner -->
   {{ with .Params.banner }}
     <section class="section pt-14">
-      <div class="container">
-        <div class="row justify-center translate-y-3/4">
-          <div class="lg:col-7 md:col-9 mb-8 text-start">
+      <div class="container  ">
+        <div
+          class="flex flex-1  justify-center min-h-[50vh] px-16 items-end py-10 dark:text-white lg:px-10">
+          <div class="mb-8 text-start w-full">
             <h1 class="text-3xl font-bold dark:text-white lg:text-5xl">
               {{ .title | markdownify }}
             </h1>
