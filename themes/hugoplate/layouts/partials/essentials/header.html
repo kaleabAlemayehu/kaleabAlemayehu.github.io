@@ -1,13 +1,6 @@
 <header
   class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30">
-  <nav class="navbar container">
-    <!-- logo -->
-    <div class="order-0">
-      <!-- navbar brand/logo -->
-      <a class="navbar-brand block" href="{{ site.Home.RelPermalink }}">
-        {{ partial "logo" }}
-      </a>
-    </div>
+  <nav class="navbar container justify-end">
     <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
@@ -29,7 +22,7 @@
     <!-- main navbar -->
     <ul
       id="nav-menu"
-      class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+      class="navbar-nav order-3 hidden lg:flex w-full  pb-6 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
       {{ $currentPage := . }}
       {{ range site.Menus.main }}
         {{ $menuURL := .URL | absLangURL }}
@@ -111,10 +104,15 @@
         {{ if .enable }}
           <button
             aria-label="search"
-            {{ if and (not site.Params.navigation_button.enable) (not site.Params.theme_switcher)}}
-            class="border-border text-dark hover:text-primary dark:border-darkmode-border mr-5 inline-block border-r lg:border-r-0 pr-5 lg:pr-0 text-xl dark:text-white dark:hover:text-darkmode-primary"
+            {{ if and (not site.Params.navigation_button.enable) (not site.Params.theme_switcher) }}
+              class="border-border text-dark hover:text-primary
+              dark:border-darkmode-border mr-5 inline-block border-r
+              lg:border-r-0 pr-5 lg:pr-0 text-xl dark:text-white
+              dark:hover:text-darkmode-primary"
             {{ else }}
-            class="border-border text-dark hover:text-primary dark:border-darkmode-border mr-5 inline-block border-r pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
+              class="border-border text-dark hover:text-primary
+              dark:border-darkmode-border mr-5 inline-block border-r pr-5
+              text-xl dark:text-white dark:hover:text-darkmode-primary"
             {{ end }}
             data-target="search-modal">
             <i class="fa-solid fa-search"></i>
