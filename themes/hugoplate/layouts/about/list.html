@@ -18,11 +18,20 @@
 
         <div class="content text-start">
           {{ .Content }}
-          <ul class=" list-none flex ">
+          <a
+            href="{{ .Params.resume }}"
+            class="resume hover:scale-110 rounded-md  no-underline cursor-pointer"
+            download
+            >Resume</a
+          >
+          <div class="mt-8 mb-4 text-2xl font-semibold dark:text-white">
+            Skills
+          </div>
+          <ul class=" list-none flex p-0 justify-start ">
             {{ range .Params.skills }}
 
               <li
-                class="skill block dark:text-white mr-2 mb-2 rounded-sm px-2 py-1 text-xs font-medium text-white">
+                class="skill dark:text-white mr-2 mb-2 rounded-sm px-2 py-1 text-xs font-medium text-white">
                 {{ . }}
               </li>
             {{ end }}
@@ -35,4 +44,6 @@
   {{ $skill := resources.Get "js/skills.js" | js.Build }}
   <script type="module" src="{{ $skill.RelPermalink }}"></script>
 
+  {{ $rough := resources.Get "js/rough-notation.js" | js.Build }}
+  <script type="module" src="{{ $rough.RelPermalink }}"></script>
 {{ end }}

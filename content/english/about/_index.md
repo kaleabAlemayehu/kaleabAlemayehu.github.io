@@ -3,6 +3,7 @@ title: "Kaleab Alemayehu"
 meta_title: "About"
 page: "About"
 work: "Developer"
+resume: "/resume/resume.pdf"
 description: "this is meta description"
 image: "/images/avatar.jpg"
 draft: false
