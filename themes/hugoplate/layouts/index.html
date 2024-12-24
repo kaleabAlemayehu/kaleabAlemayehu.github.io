@@ -9,16 +9,30 @@
             <h1 class="text-3xl font-bold dark:text-white lg:text-5xl">
               {{ .title | markdownify }}
             </h1>
-            <p class="my-2 text-lg lg:my-4 lg:text-2xl">
+            <span
+              class="dark:text-white inline-block my-2 text-lg lg:my-4 lg:text-2xl content">
               {{ .content | markdownify }}
-            </p>
+            </span>
             <p class="font-light lg:text-xl">
-              {{ .description | markdownify }}
+              Read More
+              <a
+                href="/about"
+                class="links inline-block mr-1 no-underline cursor-pointer font-light lg:text-xl">
+                about me
+              </a>
+              or
+              <a
+                href="/contact"
+                class="links font-light inline-block ml-1 lg:text-xl no-underline cursor-pointer">
+                contact me </a
+              >.
             </p>
           </div>
         </div>
       </div>
     </section>
+    {{ $rough := resources.Get "js/roughHome.js" | js.Build }}
+    <script type="module" src="{{ $rough.RelPermalink }}"></script>
   {{ end }}
   <!-- /Banner -->
 {{ end }}
