@@ -1,5 +1,5 @@
 ---
 title: "Blog Posts"
-meta_title: ""
+meta_title: "blogs"
 description: "this is meta description"
 ---

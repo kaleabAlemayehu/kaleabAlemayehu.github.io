@@ -1,7 +1,7 @@
 ---
 title: "Kaleab Alemayehu"
 meta_title: "About"
-page: "About"
+route: "About Me"
 work: "Developer"
 resume: "/resume/resume.pdf"
 description: "this is meta description"

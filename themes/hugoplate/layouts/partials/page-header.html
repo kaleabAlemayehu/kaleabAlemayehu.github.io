@@ -1,9 +1,11 @@
 <section>
-  <div class="container text-center">
+  <div class="container text-center ">
     <div
-      class="from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light rounded-2xl bg-gradient-to-b px-8 py-14">
-      <h1>{{ T (printf "%s" (lower .Title)) | default .Title | title }}</h1>
-      {{ partial "components/breadcrumb" (dict "Context" . "Class" "mt-6") }}
+      class="mx-auto w-4/5 px-8 py-10 border-[0.2px] border-transparent border-b-gray-200">
+      <h1
+        class="text-start text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+        {{ (lower .Params.meta_title) }}
+      </h1>
     </div>
   </div>
 </section>
