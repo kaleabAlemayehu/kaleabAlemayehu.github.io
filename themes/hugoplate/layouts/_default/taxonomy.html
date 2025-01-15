@@ -1,21 +1,21 @@
 {{ define "main" }}
-  {{ partial "page-header" . }}
-
-
-  <section class="section">
-    <div class="container">
-      <div class="row gx-5">
-        <!-- blog posts -->
-        <div class="lg:col-8">
-          <div class="row">
-            {{ range .Data.Pages }}
-              <div class="md:col-6 mb-14">
-                {{ partial "components/blog-card" . }}
-              </div>
-            {{ end }}
-          </div>
+{{ partial "page-header" . }}
+<div class="container mt-4">
+  <div class="flex flex-col gx-1">
+    <!-- blog posts -->
+    <div class="w-4/5 mx-auto">
+      <div class="flex flex-col">
+        {{ $paginator:= .Paginate .RegularPages }}
+        {{ range $paginator.Pages }}
+        <div>
+          {{ partial "components/blog-card" . }}
         </div>
+        {{ end }}
       </div>
+      {{ partial "components/pagination.html" . }}
     </div>
-  </section>
+    <!-- sidebar -->
+  </div>
+</div>
+</section>
 {{ end }}

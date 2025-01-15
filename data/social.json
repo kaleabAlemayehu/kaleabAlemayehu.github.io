@@ -1,9 +1,9 @@
 {
   "main": [
     {
-      "name": "facebook",
-      "icon": "fab fa-facebook",
-      "link": "https://www.facebook.com/"
+      "name": "telegram",
+      "icon": "fab fa-telegram",
+      "link": "https://www.t.me/"
     },
     {
       "name": "twitter",

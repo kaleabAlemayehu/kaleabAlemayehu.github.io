@@ -3,23 +3,10 @@
     <div class="container">
       <div class="row justify-center">
         <article class="lg:col-10">
-          {{ $image:= .Params.image }}
-          {{ if $image }}
-            <div class="mb-10">
-              {{ partial "image" (dict "Src" $image "Context" .Page "Alt" .Title "Class" "w-full rounded") }}
-            </div>
-          {{ end }}
-          <h1 class="h2 mb-4">
+          <h1 class="h2 ">
             {{ .Title }}
           </h1>
           <ul class="mb-4">
-            <li class="mr-4 inline-block">
-              <a
-                href="{{ `authors/` | relLangURL }}{{ .Params.Author | urlize }}/">
-                <i class="fa-regular fa-circle-user mr-2"></i
-                >{{ .Params.author }}
-              </a>
-            </li>
             {{ $categories:= .Params.categories }}
             {{ if $categories }}
               <li class="mr-4 inline-block">
@@ -28,7 +15,9 @@
                   <a
                     href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/"
                     class=""
-                    >{{ . | humanize }}{{ if ne $i (sub (len $categories) 1) }}
+                    >{{ . | humanize }}{{ if ne $i
+                      (sub (len $categories) 1)
+                    }}
                       {{ "," }}
                     {{ end }}
                   </a>
@@ -63,7 +52,9 @@
               </div>
             {{ end }}
             <div class="lg:col-4 flex items-center">
-              {{ partial "social-share" (dict "Context" . "Class" "share-icons" "Title" (T "share") "Whatsapp" false "Telegram" false "Linkedin" false "Pinterest" false "Tumblr" false "Vk" false) }}
+              {{ partial "social-share" (dict "Context" . "Class" "share-icons" "Title" (T "share") "Whatsapp" false
+                "Telegram" false "Linkedin" false "Pinterest" false "Tumblr" false "Vk" false)
+              }}
             </div>
           </div>
           <!-- comments -->
@@ -76,7 +67,9 @@
       </div>
 
       <!-- Related posts -->
-      {{ $related := (where site.RegularPages "Section" "in" site.Params.mainSections) | intersect (where site.RegularPages ".Title" "!=" .Title) | union (site.RegularPages.Related . ) }}
+      {{ $related := (where site.RegularPages "Section" "in" site.Params.mainSections) | intersect (where
+        site.RegularPages ".Title" "!=" .Title) | union (site.RegularPages.Related . )
+      }}
       {{ $related = $related | shuffle | first 3 }}
       {{ with $related }}
         <div class="section pb-0">
