@@ -1,0 +1,56 @@
+---
+title: "Project"
+meta_title: "Project"
+description: "this is meta description"
+draft: false
+projects:
+  - title: "kzip"
+    desc: "loremEros quis tempor ex magna providerent urna laboris esse. Sunt ex, suscipit commodo harmud velaliquam ullamco amet, quis laboris pariatur esse. Dolor amet sunt sed nulla, adipiscing duis. Eu quis magna adipiscing voluptate ultricies. Sunt consectetur adipiscing, quis eros aliquip velaliquam tempor nostrud ullamco"
+    links:
+      - url: "https://www.github.com/kaleabAlemayehu/kzip"
+        source: "github"
+      - url: "http://localhost:1313/project/#kzip"
+        source: "share"
+      - url: "http://localhost:1313/project/#kzip"
+        source: "url"
+    tech:
+      - "Typescript"
+      - "Javascript"
+      - "Go"
+      - "Vue.js"
+      - "Tailwindcss"
+      - "Nuxt.js"
+      - "Docker"
+  - title: "anonThread"
+    desc: "lorem blah blah"
+    links:
+      - url: "https://www.github.com/kaleabAlemayehu/kzip"
+        source: "github"
+      - url: "http://localhost:1313/project/#kzip"
+        source: "share"
+    tech:
+      - "Typescript"
+      - "Javascript"
+      - "Go"
+      - "Vue.js"
+      - "Tailwindcss"
+      - "Nuxt.js"
+      - "Docker"
+  - title: "tux"
+    desc: "loremEros quis tempor ex magna providerent urna laboris esse. Sunt ex, suscipit commodo harmud velaliquam ullamco amet, quis laboris pariatur esse. Dolor amet sunt sed nulla, adipiscing duis. Eu quis magna adipiscing voluptate ultricies. Sunt consectetur adipiscing, quis eros aliquip velaliquam tempor nostrud ullamco"
+    # links:
+    #   - url: "https://www.github.com/kaleabAlemayehu/kzip"
+    #     source: "github"
+    #   - url: "http://localhost:1313/project/#kzip"
+    #     source: "share"
+    #   - url: "http://localhost:1313/project/#kzip"
+    #     source: "url"
+    tech:
+      - "Typescript"
+      - "Javascript"
+      - "Go"
+      - "Vue.js"
+      - "Tailwindcss"
+      - "Nuxt.js"
+      - "Docker"
+---

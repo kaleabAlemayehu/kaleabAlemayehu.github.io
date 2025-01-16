@@ -1,0 +1,25 @@
+{{ define "main" }}
+{{ partial "page-header" . }}
+
+
+<section class="section gx-1 py-4">
+  <div class="container">
+    <div class="flex flex-col gx-1">
+      <!-- project posts -->
+      <div class="w-4/5 mx-auto ">
+        <div class="flex flex-col">
+          {{ range .Params.projects }}
+          <!-- <div -->
+          <!--   class="border-none rounded-md dark:border-gray-700 px-8 py-1"> -->
+          <div>
+            {{ partial "components/project-card" . }}
+          </div>
+          {{ end }}
+        </div>
+        {{ partial "components/pagination.html" . }}
+      </div>
+      <!-- sidebar -->
+    </div>
+  </div>
+</section>
+{{ end }}
