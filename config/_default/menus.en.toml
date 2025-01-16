@@ -12,8 +12,8 @@ url = "/about"
 weight = 2
 
 [[main]]
-name = "Contact"
-url = "/contact"
+name = "Project"
+url = "/project"
 weight = 3
 
 [[main]]
