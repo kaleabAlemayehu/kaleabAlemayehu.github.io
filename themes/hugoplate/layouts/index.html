@@ -1,38 +1,32 @@
 {{ define "main" }}
-  <!-- Banner -->
-  {{ with .Params.banner }}
-    <section class="section pt-14">
-      <div class="container  ">
-        <div
-          class="flex flex-1  justify-center min-h-[50vh] px-16 items-end py-10 dark:text-white lg:px-10">
-          <div class="mb-8 text-start w-full">
-            <h1 class="text-3xl font-bold dark:text-white lg:text-5xl">
-              {{ .title | markdownify }}
-            </h1>
-            <span
-              class="dark:text-white inline-block my-2 text-lg lg:my-4 lg:text-2xl content">
-              {{ .content | markdownify }}
-            </span>
-            <p class="font-light lg:text-xl">
-              Read More
-              <a
-                href="/about"
-                class="links inline-block mr-1 no-underline cursor-pointer font-light lg:text-xl">
-                about me
-              </a>
-              or
-              <a
-                href="/contact"
-                class="links font-light inline-block ml-1 lg:text-xl no-underline cursor-pointer">
-                contact me </a
-              >.
-            </p>
-          </div>
-        </div>
+<!-- Banner -->
+{{ with .Params.banner }}
+<section class="section pt-14">
+  <div class="container  ">
+    <div class="flex flex-1  justify-center min-h-[50vh] px-16 items-end py-10 dark:text-white lg:px-10">
+      <div class="mb-8 text-start w-full">
+        <h1 class="text-3xl font-bold dark:text-white lg:text-5xl">
+          {{ .title | markdownify }}
+        </h1>
+        <span class="dark:text-white inline-block my-2 text-lg lg:my-4 lg:text-2xl content">
+          {{ .content | markdownify }}
+        </span>
+        <p class="font-light lg:text-xl">
+          Read More
+          <a href="/about" class="links inline-block mr-1 no-underline text-dark cursor-pointer font-light lg:text-xl">
+            about me
+          </a>
+          or
+          <a href="/contact"
+            class="links font-light inline-block ml-1 text-dark lg:text-xl no-underline cursor-pointer">
+            contact me </a>.
+        </p>
       </div>
-    </section>
-    {{ $rough := resources.Get "js/roughHome.js" | js.Build }}
-    <script type="module" src="{{ $rough.RelPermalink }}"></script>
-  {{ end }}
-  <!-- /Banner -->
+    </div>
+  </div>
+</section>
+{{ $rough := resources.Get "js/roughHome.js" | js.Build }}
+<script type="module" src="{{ $rough.RelPermalink }}"></script>
+{{ end }}
+<!-- /Banner -->
 {{ end }}
