@@ -3,7 +3,13 @@
     <div class="container">
       <div class="row justify-center">
         <article class="lg:col-10">
-          <h1 class="h2 ">
+          {{ $image:= .Params.image }}
+          {{ if $image }}
+            <div class="mb-10">
+              {{ partial "image" (dict "Src" $image "Context" .Page "Alt" .Title "Class" "w-full rounded") }}
+            </div>
+          {{ end }}
+          <h1 class="h2 mb-4">
             {{ .Title }}
           </h1>
           <ul class="mb-4">
@@ -57,32 +63,8 @@
               }}
             </div>
           </div>
-          <!-- comments -->
-          {{ if site.Config.Services.Disqus.Shortname }}
-            <div class="mt-20">
-              {{ template "_internal/disqus.html" . }}
-            </div>
-          {{ end }}
         </article>
       </div>
-
-      <!-- Related posts -->
-      {{ $related := (where site.RegularPages "Section" "in" site.Params.mainSections) | intersect (where
-        site.RegularPages ".Title" "!=" .Title) | union (site.RegularPages.Related . )
-      }}
-      {{ $related = $related | shuffle | first 3 }}
-      {{ with $related }}
-        <div class="section pb-0">
-          <h2 class="h3 mb-12">{{ T "related_posts" }}</h2>
-          <div class="row">
-            {{ range . }}
-              <div class="lg:col-4 md:col-6 mb-14">
-                {{ partial "components/blog-card" . }}
-              </div>
-            {{ end }}
-          </div>
-        </div>
-      {{ end }}
     </div>
   </section>
 {{ end }}
