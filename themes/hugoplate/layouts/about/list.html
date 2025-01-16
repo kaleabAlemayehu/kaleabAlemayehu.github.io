@@ -1,49 +1,46 @@
 {{ define "main" }}
-  {{ partial "page-header" . }}
-  <section class="section-sm">
-    <div class="container ">
-      <div class="mx-auto w-4/5 lg:grid lg:grid-cols-[1fr_3fr] space-x-8 ">
-        <div class="text-center">
-          <div class="">
-            {{ partial "image" (dict "Src" .Params.image "Context" .Page "Alt" .Title "Class" "mx-auto mb-6 rounded-full object-cover" "Size" "200x200") }}
-          </div>
-          <div
-            class="mb-4 pt-4 pb-2 text-2xl font-bold leading-8 text-center tracking-tight">
-            {{ .Title }}
-          </div>
-          <div class="font-medium text-gray-500 dark:text-gray-400">
-            {{ .Params.work }}
-          </div>
+{{ partial "page-header" . }}
+<section class="section-sm">
+  <div class="container ">
+    <div class="mx-auto w-4/5 lg:grid lg:grid-cols-[1fr_3fr] space-x-8 ">
+      <div class="text-center">
+        <div class="">
+          {{ partial "image" (dict "Src" .Params.image "Context" .Page "Alt" .Title "Class" `mx-auto mb-6 rounded-full
+          object-cover` "Size" "200x200")
+          }}
         </div>
-
-        <div class="content text-start">
-          {{ .Content }}
-          <a
-            href="{{ .Params.resume }}"
-            class="resume hover:scale-110 rounded-md  no-underline cursor-pointer"
-            download>
-            Resume
-          </a>
-          <div class="mt-8 mb-4 text-2xl font-semibold dark:text-white">
-            Skills
-          </div>
-          <ul class=" list-none flex p-0 justify-start ">
-            {{ range .Params.skills }}
-
-              <li
-                class="skill dark:text-white mr-2 mb-2 rounded-sm px-2 py-1 text-xs font-medium text-white">
-                {{ . }}
-              </li>
-            {{ end }}
-          </ul>
+        <div class="mb-4 pt-4 pb-2 text-2xl font-bold leading-8 text-center tracking-tight">
+          {{ .Title }}
+        </div>
+        <div class="font-medium text-gray-500 dark:text-gray-400">
+          {{ .Params.work }}
         </div>
       </div>
+
+      <div class="content text-start">
+        {{ .Content }}
+        <a href="{{ .Params.resume }}" class="resume hover:scale-110 rounded-md  no-underline cursor-pointer" download>
+          Resume
+        </a>
+        <div class="mt-8 mb-4 text-2xl font-semibold dark:text-white">
+          Skills
+        </div>
+        <ul class=" list-none flex p-0 justify-start ">
+          {{ range .Params.skills }}
+
+          <li class="tech dark:text-white mr-2 mb-2 rounded-sm px-2 py-1 text-xs font-medium text-white">
+            {{ . }}
+          </li>
+          {{ end }}
+        </ul>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  {{ $skill := resources.Get "js/skills.js" | js.Build }}
-  <script type="module" src="{{ $skill.RelPermalink }}"></script>
+{{ $tech := resources.Get "js/tech.js" | js.Build }}
+<script type="module" src="{{ $tech.RelPermalink }}"></script>
 
-  {{ $rough := resources.Get "js/roughAbout.js" | js.Build }}
-  <script type="module" src="{{ $rough.RelPermalink }}"></script>
+{{ $rough := resources.Get "js/roughAbout.js" | js.Build }}
+<script type="module" src="{{ $rough.RelPermalink }}"></script>
 {{ end }}
