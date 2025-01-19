@@ -1,27 +1,28 @@
 <div
   class="border-[0.1px] ring-0 outline-none rounded-md border-white dark:border-theme-dark bg-white dark:bg-theme-dark px-8 py-6 mb-4">
   <div class="bg-inherit flex flex-col ">
-    <h2
-      class="flex-auto box-content block my-2 text-gray-900  dark:text-gray-100 cursor-pointer truncate">
+    <h5 class="flex-auto box-content block my-2 text-gray-900  dark:text-gray-100 cursor-pointer truncate">
       <a href="{{ .RelPermalink }} " class=" no-underline text-inherit ">
         {{ .Title }}
       </a>
-    </h2>
+    </h5>
     {{ $categories:= .Params.categories }}
     {{ if $categories }}
-      <span class="mr-4">
-        {{ range $i,$p:= $categories }}
-          <a
-            href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/"
-            class="mr-8 underline"
-            >{{ . | humanize }}{{ if
-              ne $i (sub (len $categories) 1)
-            }}
-            {{ end }}
-          </a>
+    <span class="mr-4">
+      {{ range $i,$p:= $categories }}
+      <a href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/"
+        class="mr-8 text-dark categories mb-2 rounded-sm px-2 py-1 text-sm font-medium inline-block">{{ . | humanize
+        }}{{ if
+        ne $i (sub (len $categories) 1)
+        }}
         {{ end }}
-      </span>
+      </a>
+      {{ end }}
+    </span>
     {{ end }}
     <p class="mb-6">{{ .Summary }}</p>
+
+    {{ $links := resources.Get "js/roughBlog.js" | js.Build }}
+    <script type="module" src="{{ $links.RelPermalink }}"></script>
   </div>
 </div>
