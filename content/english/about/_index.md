@@ -5,7 +5,7 @@ route: "About Me"
 work: "Developer"
 resume: "/resume/resume.pdf"
 description: "this is meta description"
-image: "/images/avatar.jpg"
+image: "/images/avatar.png"
 draft: false
 skills:
   - "Typescript"
@@ -14,7 +14,15 @@ skills:
   - "Vue.js"
   - "Tailwindcss"
   - "Nuxt.js"
+  - "PostgreSQL"
+  - "MongoDB"
+  - "Redis"
   - "Docker"
+  - "GraphQL"
+  - "Nats"
+  - "C"
 ---
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis illum nesciunt commodi vel nisi ut alias excepturi ipsum, totam, labore tempora, odit ex iste tempore sed. Fugit voluptatibus perspiciatis assumenda nulla ad nihil, omnis vel, doloremque sit quam autem optio maiores, illum eius facilis et quo consectetur provident dolor similique! Enim voluptatem dicta expedita veritatis repellat dolorum impedit, provident quasi at.
+Hey, I’m someone who’s endlessly curious about how things work, especially when it comes to computers. I’m passionate about Linux and could easily spend hours talking about it. I enjoy building things that catch my interest, whether it’s a project to solve a problem or exploring the deeper, more technical side of how systems and software operate.
+
+For me, it’s all about digging under the hood and understanding the details while creating something meaningful along the way.

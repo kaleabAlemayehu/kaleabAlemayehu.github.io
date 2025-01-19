@@ -2,11 +2,11 @@
 {{ partial "page-header" . }}
 <section class="section-sm">
   <div class="container ">
-    <div class="mx-auto w-4/5 lg:grid lg:grid-cols-[1fr_3fr] space-x-8 ">
+    <div class="mx-auto w-4/5 lg:grid lg:grid-cols-3 space-x-4 ">
       <div class="text-center">
         <div class="">
-          {{ partial "image" (dict "Src" .Params.image "Context" .Page "Alt" .Title "Class" `mx-auto mb-6 rounded-full
-          object-cover` "Size" "200x200")
+          {{ partial "image" (dict "Src" .Params.image "Context" .Page "Alt" .Title "Class" `mx-auto mb-6 rounded-none
+          object-cover` "Size" "750x750")
           }}
         </div>
         <div class="mb-4 pt-4 pb-2 text-2xl font-bold leading-8 text-center tracking-tight">
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="content text-start">
+      <div class="content col-span-2 text-start">
         {{ .Content }}
         <a href="{{ .Params.resume }}" class="resume hover:scale-110 rounded-md  no-underline cursor-pointer" download>
           Resume
