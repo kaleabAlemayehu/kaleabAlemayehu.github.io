@@ -1,16 +1,15 @@
 <div
   class="border-[0.1px] ring-0 outline-none rounded-md border-white dark:border-theme-dark bg-white dark:bg-theme-dark px-8 py-6 mb-4">
   <div class="bg-inherit flex flex-col ">
-    <p class="flex-auto box-content block my-2 text-gray-900  dark:text-gray-100 cursor-pointer truncate">
+    <p class="flex-auto box-content block my-2 text-gray-900  dark:text-gray-100  truncate">
       {{ .title }}
     </p>
-    <p class="mb-6">{{ .desc }}</p>
+    <p class="mb-6">{{ .desc | markdownify }}</p>
     {{ $tech:= .tech }}
     {{ if $tech }}
     <span class="mr-4">
       {{ range $i,$p:= $tech }}
-      <span class="tech dark:text-white mr-2 mb-2 rounded-sm px-2 py-1 text-xs font-medium text-white">{{ . | humanize
-        }}{{ if
+      <span class="tech mr-2 mb-2 rounded-sm px-2 py-1 text-xs font-medium text-white">{{ . | }}{{ if
         ne $i (sub (len $tech) 1)
         }}
         {{ end }}
@@ -23,7 +22,7 @@
     <div class="mr-4 flex justify-end gap-x-4 ">
       {{ range $i,$p:= $links }}
       <a href="{{ $p.url }}" target="_blank"
-        class="links  mr-2 mb-2 rounded-sm px-2 py-1 text-sm font-medium inline-block">{{ $p.source }}</a>
+        class="links mr-2 mb-2 rounded-sm px-2 py-1 text-sm text-dark font-medium inline-block">{{ $p.source }}</a>
       {{ end }}
     </div>
     {{ end }}

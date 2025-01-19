@@ -6,7 +6,6 @@ const links = document.querySelectorAll(".links");
 links.forEach((ln, index) => {
   const annotation = annotate(ln, {
     type: "highlight",
-    // color: colors[index + 2],
     color: generateColor(),
     padding: 1,
   });
