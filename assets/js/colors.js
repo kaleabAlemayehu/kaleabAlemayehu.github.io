@@ -19,6 +19,7 @@ const colors = {
   HTML: "#E34C26",
   CSS: "#2965f1",
   "Grammy.js": "#009dca",
+  PostGIS: "#56799f",
 };
 
 const getColors = (name) => {
@@ -27,8 +28,14 @@ const getColors = (name) => {
 };
 
 function generateColor() {
-  return "hsl(" + 360 * Math.random() + "," +
-    (45 + 50 * Math.random()) + "%," +
-    (85 + 10 * Math.random()) + "%)";
+  return (
+    "hsl(" +
+    360 * Math.random() +
+    "," +
+    (45 + 50 * Math.random()) +
+    "%," +
+    (85 + 10 * Math.random()) +
+    "%)"
+  );
 }
 export { generateColor, getColors };
