@@ -97,18 +97,27 @@ maxAge = "720h"
 
 
 ############################ Markup ##############################
+
 [markup]
+[markup.highlight]
+style = "tokyonight-night"  # or any from see https://xyproto.github.io/splash/docs/all.html
+codeFences = true
+guessSyntax = true
+noClasses = true
+lineNos = true   # optional, for line numbers
+tabWidth = 4
+# [markup]
 [markup.goldmark.renderer]
 unsafe = true
-
-[markup.highlight]
-style = 'monokai' # see https://xyproto.github.io/splash/docs/all.html
-
-[markup.tableOfContents]
+#
+# [markup.highlight]
+# style = 'monokai'
+#
+# [markup.tableOfContents]
 startLevel = 2
 endLevel = 5
 ordered = true
-
+#
 
 ########################### Media types ###########################
 [mediaTypes]
