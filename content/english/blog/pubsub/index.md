@@ -2,7 +2,7 @@
 title: "Pub/Sub Concurrency Pattern"
 meta_title: "Pub/Sub Concurrency Pattern"
 description: "Publisher / Subscriber Concurrency pattern"
-date: 2025-04-04T05:00:00Z
+date: 2025-08-23T00:00:00Z
 image: "pubsub.png"
 categories: ["Pattern", "Event"]
 author: "Kaleab Alemayehu ( Neo )"
@@ -11,6 +11,7 @@ draft: false
 ---
 
 ## Story time
+
 I was trying to develop werewolf telegram bot, where i have 3 components the game, gameManager, and notifier. as you may have guess already there resposiblity is:
   - gameManager: the manager of all the games it spawn new games clean finished one and store the stats and states on the repository layer.
   - game: the spawned Game instance that gonna be managed by gameManager, and it is a state machine that track and react to game states occur during the game loop and gonna send game events to the notifier, and gameManager.
