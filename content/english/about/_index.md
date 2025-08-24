@@ -3,7 +3,7 @@ title: "Kaleab Alemayehu"
 meta_title: "About"
 route: "About Me"
 work: "Developer"
-resume: "/resume/resume.pdf"
+resume: "/resume/kaleab_software_engineer.pdf"
 description: "this is meta description"
 image: "/images/avatar.png"
 draft: false
