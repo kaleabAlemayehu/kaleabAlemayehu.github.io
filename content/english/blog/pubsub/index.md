@@ -122,7 +122,7 @@ func main(){
     }
   }()
   // publish a couple of times
-  for i := range 5 {
+  for i :=0; i < 5; i++{
     broker.Publish(domain.GameEvent{
       // here event data 
     })
