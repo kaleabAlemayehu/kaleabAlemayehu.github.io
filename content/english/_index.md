@@ -2,5 +2,5 @@
 # Banner
 banner:
   title: "Hi, I am Kaleab"
-  content: "Developer"
+  content: "Softeware Engineer"
 ---
