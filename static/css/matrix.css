@@ -27,6 +27,8 @@ html, body {
   padding: 0;
 }
 * { box-sizing: border-box; }
+*:focus { outline: none; }
+*:focus-visible { outline: 2px solid #00e639; outline-offset: 2px; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #000000; }
 ::-webkit-scrollbar-thumb { background: #1e5416; border-radius: 3px; }
