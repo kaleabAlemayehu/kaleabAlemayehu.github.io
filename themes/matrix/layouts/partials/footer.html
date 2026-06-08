@@ -1,0 +1,12 @@
+<footer class="bg-background dark:bg-background border-t border-secondary-container flex flex-col md:flex-row justify-between items-center w-full px-6 py-6 gap-4 relative z-20 mt-20 select-none">
+  <div class="font-mono text-xs text-secondary">
+    // [{{ now.Year }}]
+  </div>
+  <div class="flex gap-6 font-mono text-xs">
+    {{ range hugo.Data.social.main }}
+    <a class="text-secondary hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all duration-200" href="{{ .link }}" target="_blank" rel="noopener">
+      <i class="{{ .icon }}"></i> {{ .name }}
+    </a>
+    {{ end }}
+  </div>
+</footer>

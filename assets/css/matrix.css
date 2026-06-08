@@ -1,0 +1,75 @@
+.scanlines {
+  background: linear-gradient(to bottom, rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 50;
+}
+.cursor-block {
+  display: inline-block;
+  width: 0.6em;
+  height: 1em;
+  background-color: #00e639;
+  margin-left: 2px;
+  animation: blink 0.8s infinite steps(1);
+  vertical-align: middle;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.matrix-glow { text-shadow: 0 0 10px #00e639, 0 0 20px #00e639; }
+.matrix-grid {
+  background-image: linear-gradient(rgba(0,230,57,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,230,57,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+html, body {
+  background-color: #000000;
+  color: #e2e2e2;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+* { box-sizing: border-box; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #000000; }
+::-webkit-scrollbar-thumb { background: #1e5416; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00e639; }
+
+body.homepage { overflow: hidden; }
+
+.matrix-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.group\/btn:hover .matrix-arrow {
+  transform: translateX(4px);
+}
+
+.flicker-slower { animation: flicker 4s linear infinite; }
+.flicker-slow { animation: flicker 3s linear infinite; }
+.flicker-fast { animation: flicker 2s linear infinite; }
+.flicker-faster { animation: flicker 1s linear infinite; }
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.99;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.4;
+  }
+}
+
+.highlight pre,
+.highlight code,
+pre > code,
+.lnt {
+  background-color: #000000 !important;
+}
+.highlight {
+  background: #000000 !important;
+  overflow-x: auto;
+}
+.highlight pre {
+  overflow-x: auto;
+  white-space: pre;
+}
+pre {
+  overflow-x: auto;
+}

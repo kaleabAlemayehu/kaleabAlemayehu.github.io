@@ -1,0 +1,18 @@
+{{ define "main" }}
+<main class="h-screen flex items-center justify-center relative z-10 overflow-hidden px-4">
+  <div class="text-center max-w-lg w-full">
+    <div class="mb-6 md:mb-8">
+      <p class="font-mono text-5xl sm:text-6xl md:text-8xl font-bold text-surface-tint matrix-glow mb-2 select-none">404</p>
+    </div>
+    <div class="font-mono text-xs sm:text-sm text-secondary leading-relaxed mb-8 text-left max-w-md mx-auto select-none">
+      <p class="mb-2"><span class="text-surface-tint">error:</span> page not found</p>
+      <p class="mb-2"><span class="text-surface-tint">status:</span> the path you followed does not exist in this construct</p>
+      <p class="mb-2"><span class="text-surface-tint">reason:</span> you may have been redirected, or the matrix has changed</p>
+      <p class="mb-4"><span class="text-surface-tint">action:</span> initiating return sequence...</p>
+    </div>
+    <a href="/" class="inline-block font-mono text-sm text-primary hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all border-b border-primary hover:border-surface-tint pb-1">
+      [ RETURN HOME ]
+    </a>
+  </div>
+</main>
+{{ end }}

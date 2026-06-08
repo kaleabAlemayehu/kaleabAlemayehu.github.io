@@ -1,0 +1,29 @@
+{{ define "main" }}
+<main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+  <h1 class="font-mono text-xl sm:text-2xl font-bold text-surface-tint matrix-glow mb-8 select-none">&gt; ARCHIVE_LOGS</h1>
+  <div class="flex flex-col gap-8 md:gap-10">
+    {{ range .RegularPages }}
+    <article class="group relative transition-all duration-300 pb-8 border-b border-outline-variant/30">
+      <div class="flex flex-col items-start">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-4 mb-2 select-none">
+          <span class="font-mono text-xs text-outline">DATE: {{ .Date.Format "2006.01.02" }}</span>
+          {{ with .Params.categories }}
+          <span class="font-mono text-xs text-secondary">[ TAGS: {{ delimit . ", " | upper }} ]</span>
+          {{ end }}
+        </div>
+        <h2 class="font-mono text-base sm:text-lg mb-4 text-primary group-hover:text-surface-tint group-hover:drop-shadow-[0_0_8px_#00e639] transition-all">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h2>
+        <p class="text-on-surface-variant mb-4 max-w-3xl text-left font-mono text-sm">
+          &gt; {{ .Summary | plainify | truncate 200 }}
+        </p>
+        <a href="{{ .RelPermalink }}" class="text-primary font-mono text-sm hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all flex items-center gap-2 group/btn select-none">
+          <span class="border-b border-primary group-hover/btn:border-surface-tint">INITIALIZE_READ_SEQUENCE</span>
+          <span class="matrix-arrow text-lg leading-none transition-transform duration-300 group-hover/btn:translate-x-2">→</span>
+        </a>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</main>
+{{ end }}

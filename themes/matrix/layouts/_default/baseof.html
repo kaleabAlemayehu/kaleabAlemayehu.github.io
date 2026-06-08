@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="dark" lang="en" style="background-color: #000000;">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.Title }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-tint": "#00e639",
+            "primary-container": "#00ff41",
+            "on-primary": "#003907",
+            "primary": "#ebffe2",
+            "secondary": "#99d688",
+            "on-background": "#e2e2e2",
+            "background": "#000000",
+            "surface-container-lowest": "#0e0e0e",
+            "surface-container-low": "#1b1b1b",
+            "surface-container": "#1f1f1f",
+            "surface-container-high": "#2a2a2a",
+            "surface-container-highest": "#353535",
+            "secondary-container": "#1e5416",
+            "on-secondary-container": "#8cc77b",
+            "outline": "#84967e",
+            "outline-variant": "#3b4b37",
+            "on-surface": "#e2e2e2",
+            "on-surface-variant": "#b9ccb2"
+          },
+          fontFamily: {
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/css/matrix.css">
+</head>
+<body class="font-mono text-on-background bg-background {{ if .IsHome }}homepage{{ end }}">
+  <div class="fixed inset-0 scanlines opacity-10 pointer-events-none z-50"></div>
+  {{ partial "header.html" . }}
+  {{ if .IsHome }}
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ else }}
+  <main class="min-h-screen relative pt-20">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ end }}
+  {{ partial "footer.html" . }}
+</body>
+</html>

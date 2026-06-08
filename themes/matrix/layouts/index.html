@@ -1,0 +1,15 @@
+{{ define "main" }}
+<canvas id="c" class="fixed top-0 left-0 w-full h-full" style="z-index: 0;"></canvas>
+<main class="h-screen flex items-center justify-center relative z-10 overflow-hidden select-none">
+  <div class="text-center pointer-events-none">
+    <h1 class="font-mono text-xl md:text-2xl text-surface-tint matrix-glow mb-3 select-none">
+      <span class="flicker-slower">H</span><span class="flicker-fast">e</span><span class="flicker-slow">l</span><span class="flicker-faster">l</span><span class="flicker-slower">o</span><span class="flicker-fast">,</span><span class="flicker-slow"> </span><span class="flicker-faster">F</span><span class="flicker-slower">r</span><span class="flicker-fast">i</span><span class="flicker-slow">e</span><span class="flicker-faster">n</span><span class="flicker-slower">d</span><span class="cursor-block"></span>
+    </h1>
+    <p class="font-mono text-sm text-secondary italic select-none">
+      (click & drag)
+    </p>
+  </div>
+</main>
+<script src="/js/engine.js"></script>
+<script src="/js/secret.js"></script>
+{{ end }}

@@ -1,0 +1,28 @@
+{{ define "main" }}
+<main class="flex-grow flex items-start justify-center px-4 sm:px-6 pt-24 pb-12 md:pb-16 relative">
+  <div class="max-w-4xl w-full z-10">
+    <div class="mb-10">
+      <div class="mb-6">
+        <h1 class="font-mono text-xl sm:text-2xl font-bold text-surface-tint matrix-glow mb-4">{{ .Title }}</h1>
+        {{ with .Params.work }}<p class="font-mono text-sm text-secondary mb-2 select-none">ROLE: {{ . }}</p>{{ end }}
+      </div>
+      <div class="prose prose-invert max-w-none font-mono text-sm text-on-surface leading-relaxed">
+        {{ .Content }}
+      </div>
+      {{ with .Params.resume }}
+      <a href="{{ . }}" class="inline-block mt-6 font-mono text-sm text-primary px-4 py-2 hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all duration-150 select-none" download>[ DOWNLOAD_RESUME ]</a>
+      {{ end }}
+      {{ with .Params.skills }}
+      <div class="mt-8">
+        <h2 class="font-mono text-lg text-surface-tint mb-4 select-none">&gt; SKILLS</h2>
+        <div class="flex flex-wrap gap-2">
+          {{ range . }}
+          <span class="font-mono text-xs text-secondary border border-outline-variant px-2 py-1 select-none">[ {{ . | upper }} ]</span>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</main>
+{{ end }}
