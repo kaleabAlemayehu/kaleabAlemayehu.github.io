@@ -10,7 +10,7 @@
         {{ .Content }}
       </div>
       {{ with .Params.resume }}
-      <a href="{{ . }}" class="inline-block mt-6 font-mono text-sm text-primary px-4 py-2 hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all duration-150 select-none" download>[ DOWNLOAD_RESUME ]</a>
+      <a href="{{ . }}" class="inline-block mt-6 font-mono text-sm text-primary px-4 py-2 glow-hover transition-all duration-150 select-none" download>[ DOWNLOAD_RESUME ]</a>
       {{ end }}
       {{ with .Params.skills }}
       <div class="mt-8">

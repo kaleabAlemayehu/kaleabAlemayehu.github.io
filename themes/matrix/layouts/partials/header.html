@@ -1,5 +1,5 @@
 <nav class="fixed top-0 z-40 bg-background dark:bg-background border-none border-primary shadow-[0_0_10px_#00e639] flex justify-between items-center w-full px-6 py-4 select-none">
-  <a href="/" class="font-mono text-lg font-bold text-surface-tint tracking-tighter cursor-pointer matrix-glow hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all">
+  <a href="/" class="font-mono text-lg font-bold text-surface-tint tracking-tighter cursor-pointer matrix-glow nav-link">
     K
   </a>
   <button id="menu-toggle" class="md:hidden text-surface-tint text-xl focus:outline-none" aria-label="Toggle menu">
@@ -7,15 +7,15 @@
     <span id="menu-close" class="hidden">&#10005;</span>
   </button>
   <div id="nav-links" class="hidden md:flex gap-6">
-    <a class="font-mono text-sm text-surface-tint px-3 py-1 transition-all duration-150 hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] {{ if .IsHome }}text-surface-tint drop-shadow-[0_0_8px_#00e639]{{ end }}" href="/">HOME</a>
-    <a class="font-mono text-sm text-surface-tint px-3 py-1 transition-all duration-150 hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] {{ if eq .Section "about" }}text-surface-tint drop-shadow-[0_0_8px_#00e639]{{ end }}" href="/about/">ABOUT</a>
-    <a class="font-mono text-sm text-surface-tint px-3 py-1 transition-all duration-150 hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] {{ if eq .Section "blog" }}text-surface-tint drop-shadow-[0_0_8px_#00e639]{{ end }}" href="/blog/">BLOGS</a>
+    <a class="font-mono text-sm text-surface-tint px-3 py-1 nav-link {{ if .IsHome }}active{{ end }}" href="/">HOME</a>
+    <a class="font-mono text-sm text-surface-tint px-3 py-1 nav-link {{ if eq .Section "about" }}active{{ end }}" href="/about/">ABOUT</a>
+    <a class="font-mono text-sm text-surface-tint px-3 py-1 nav-link {{ if eq .Section "blog" }}active{{ end }}" href="/blog/">BLOGS</a>
   </div>
 </nav>
 <div id="mobile-menu" class="hidden fixed inset-0 bg-background/95 z-30 flex flex-col items-center justify-center gap-8 md:hidden">
-  <a class="font-mono text-lg text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all {{ if .IsHome }}drop-shadow-[0_0_8px_#00e639]{{ end }}" href="/">HOME</a>
-  <a class="font-mono text-lg text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all {{ if eq .Section "about" }}drop-shadow-[0_0_8px_#00e639]{{ end }}" href="/about/">ABOUT</a>
-  <a class="font-mono text-lg text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all {{ if eq .Section "blog" }}drop-shadow-[0_0_8px_#00e639]{{ end }}" href="/blog/">BLOGS</a>
+  <a class="font-mono text-lg text-surface-tint nav-link {{ if .IsHome }}active{{ end }}" href="/">HOME</a>
+  <a class="font-mono text-lg text-surface-tint nav-link {{ if eq .Section "about" }}active{{ end }}" href="/about/">ABOUT</a>
+  <a class="font-mono text-lg text-surface-tint nav-link {{ if eq .Section "blog" }}active{{ end }}" href="/blog/">BLOGS</a>
 </div>
 <script>
   document.getElementById('menu-toggle').addEventListener('click', function() {

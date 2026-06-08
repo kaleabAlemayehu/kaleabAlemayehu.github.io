@@ -11,13 +11,13 @@
           <span class="font-mono text-xs text-secondary">[ TAGS: {{ delimit . ", " | upper }} ]</span>
           {{ end }}
         </div>
-        <h2 class="font-mono text-base sm:text-lg mb-4 text-primary group-hover:text-surface-tint group-hover:drop-shadow-[0_0_8px_#00e639] transition-all">
+        <h2 class="font-mono text-base sm:text-lg mb-4 text-primary group-hover:text-surface-tint transition-all">
           <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         </h2>
         <p class="text-on-surface-variant mb-4 max-w-3xl text-left font-mono text-sm">
           &gt; {{ .Summary | plainify | truncate 200 }}
         </p>
-        <a href="{{ .RelPermalink }}" class="text-primary font-mono text-sm hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all flex items-center gap-2 group/btn select-none">
+        <a href="{{ .RelPermalink }}" class="text-primary font-mono text-sm glow-hover transition-all flex items-center gap-2 group/btn select-none">
           <span class="border-b border-primary group-hover/btn:border-surface-tint">INITIALIZE_READ_SEQUENCE</span>
           <span class="matrix-arrow text-lg leading-none transition-transform duration-300 group-hover/btn:translate-x-2">→</span>
         </a>

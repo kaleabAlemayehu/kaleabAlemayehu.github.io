@@ -5,7 +5,7 @@
     {{ range .Pages }}
     <article class="group relative transition-all duration-300 pb-8 border-b border-outline-variant/30">
       <div class="flex flex-col items-start">
-        <h2 class="font-mono text-base sm:text-lg mb-4 text-primary group-hover:text-surface-tint group-hover:drop-shadow-[0_0_8px_#00e639] transition-all">
+        <h2 class="font-mono text-base sm:text-lg mb-4 text-primary group-hover:text-surface-tint transition-all">
           <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         </h2>
         <p class="font-mono text-xs text-outline select-none">{{ len .Pages }} post(s)</p>

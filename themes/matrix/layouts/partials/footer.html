@@ -4,7 +4,7 @@
   </div>
   <div class="flex gap-6 font-mono text-xs">
     {{ range hugo.Data.social.main }}
-    <a class="text-secondary hover:text-surface-tint hover:drop-shadow-[0_0_8px_#00e639] transition-all duration-200" href="{{ .link }}" target="_blank" rel="noopener">
+    <a class="text-secondary glow-hover transition-all duration-200" href="{{ .link }}" target="_blank" rel="noopener">
       <i class="{{ .icon }}"></i> {{ .name }}
     </a>
     {{ end }}

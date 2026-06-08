@@ -36,6 +36,26 @@ html, body {
 
 body.homepage { overflow: hidden; }
 
+.nav-link {
+  transition: all 0.15s ease;
+}
+.nav-link:hover {
+  color: #00e639 !important;
+  text-shadow: 0 0 8px #00e639, 0 0 16px #00e639;
+}
+.nav-link.active {
+  color: #00e639 !important;
+  text-shadow: 0 0 8px #00e639, 0 0 16px #00e639;
+}
+
+.glow-hover {
+  transition: all 0.15s ease;
+}
+.glow-hover:hover {
+  color: #00e639 !important;
+  text-shadow: 0 0 8px #00e639, 0 0 16px #00e639;
+}
+
 .matrix-arrow {
   display: inline-block;
   transition: transform 0.3s ease;
