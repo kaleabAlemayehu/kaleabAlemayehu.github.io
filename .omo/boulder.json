@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "active_work_id": "matrix-theme-412e96f5",
+  "works": {
+    "matrix-theme-412e96f5": {
+      "work_id": "matrix-theme-412e96f5",
+      "active_plan": "/home/neo/Projects/kaleabAlemayehu.github.io/.omo/plans/matrix-theme.md",
+      "plan_name": "matrix-theme",
+      "status": "completed",
+      "started_at": "2026-06-08T18:31:37.737Z",
+      "updated_at": "2026-06-08T18:57:43.372Z",
+      "session_ids": [
+        "opencode:ses_157919c21ffeEQHhO5ee9Nq5cf"
+      ],
+      "session_origins": {
+        "opencode:ses_157919c21ffeEQHhO5ee9Nq5cf": "direct"
+      },
+      "agent": "atlas",
+      "task_sessions": {},
+      "ended_at": "2026-06-08T18:57:43.371Z",
+      "elapsed_ms": 1565634
+    }
+  },
+  "active_plan": "/home/neo/Projects/kaleabAlemayehu.github.io/.omo/plans/matrix-theme.md",
+  "started_at": "2026-06-08T18:31:37.737Z",
+  "status": "completed",
+  "updated_at": "2026-06-08T18:57:43.372Z",
+  "session_ids": [
+    "opencode:ses_157919c21ffeEQHhO5ee9Nq5cf"
+  ],
+  "session_origins": {
+    "opencode:ses_157919c21ffeEQHhO5ee9Nq5cf": "direct"
+  },
+  "plan_name": "matrix-theme",
+  "task_sessions": {},
+  "agent": "atlas",
+  "ended_at": "2026-06-08T18:57:43.371Z",
+  "elapsed_ms": 1565634
+}
