@@ -13,9 +13,10 @@ draft: false
 ## Story time
 
 I was trying to develop werewolf telegram bot, where i have 3 components The Game, Game Manager, and Notifier. as you may have guess already there resposiblity is:
-  - Game Manager: the manager of all the games,it spawn new games clean finished ones and store the stats and states on the repository layer.
-  - Game: It the spawned Game instance that gonna be managed by Game Manager, and it is a state machine that track and react to game states occur during the game loop and gonna send game events to the Notifier, and Game Manager.
-  - Notifier: is the one that listen events from the game instance and send to the telegram group or users about game phase and events occur.
+
+- Game Manager: the manager of all the games,it spawn new games clean finished ones and store the stats and states on the repository layer.
+- Game: It the spawned Game instance that gonna be managed by Game Manager, and it is a state machine that track and react to game states occur during the game loop and gonna send game events to the Notifier, and Game Manager.
+- Notifier: is the one that listen events from the game instance and send to the telegram group or users about game phase and events occur.
 
 NB: if you say why not just call a function of outter layers from the game instance ( which is the inner one), it would create circular dependancy as the outter layer always depend on the inner one.
 
@@ -35,72 +36,73 @@ and that is where Pub/Sub Pattern comes into play.
 package event
 
 import (
-	"sync"
-	"github.com/kaleabAlemayehu/werewolf/internal/domain"
+ "sync"
+ "github.com/kaleabAlemayehu/werewolf/internal/domain"
 )
 
 type EventBroker struct {
-	subscribers []chan domain.GameEvent
-	mutex       sync.RWMutex
-	isClosed    bool
+ subscribers []chan domain.GameEvent
+ mutex       sync.RWMutex
+ isClosed    bool
 }
 
 func NewEventBroker() *EventBroker {
-	return &EventBroker{}
+ return &EventBroker{}
 }
 
 func (b *EventBroker) Subscribe() chan domain.GameEvent {
-	b.mutex.Lock()
-	defer b.mutex.Unlock()
-	if b.isClosed {
-		return nil
-	}
-	ch := make(chan domain.GameEvent, 10)
-	b.subscribers = append(b.subscribers, ch)
-	return ch
+ b.mutex.Lock()
+ defer b.mutex.Unlock()
+ if b.isClosed {
+  return nil
+ }
+ ch := make(chan domain.GameEvent, 10)
+ b.subscribers = append(b.subscribers, ch)
+ return ch
 }
 
 func (b *EventBroker) Unsubscribe(channel chan domain.GameEvent) {
-	b.mutex.Lock()
-	defer b.mutex.Unlock()
-	if b.isClosed {
-		return nil
-	}
-	for i, ch := range b.subscribers {
-		if ch == channel {
-			b.subscribers = append(b.subscribers[:i], b.subscribers[i+1:]...)
-			close(ch)
-			break
-		}
-	}
-	return
+ b.mutex.Lock()
+ defer b.mutex.Unlock()
+ if b.isClosed {
+  return nil
+ }
+ for i, ch := range b.subscribers {
+  if ch == channel {
+   b.subscribers = append(b.subscribers[:i], b.subscribers[i+1:]...)
+   close(ch)
+   break
+  }
+ }
+ return
 }
 
 func (b *EventBroker) Publish(event domain.GameEvent) {
-	b.mutex.RLock()
-	defer b.mutex.Unlock()
-	if b.isClosed {
-		return
-	}
-	for _, ch := range b.subscribers {
-		ch <- event
-	}
+ b.mutex.RLock()
+ defer b.mutex.Unlock()
+ if b.isClosed {
+  return
+ }
+ for _, ch := range b.subscribers {
+  ch <- event
+ }
 }
 
 func (b *EventBroker) Close() {
-	b.mutex.Lock()
-	defer b.mutex.Unlock()
-	if b.isClosed {
-		return
-	}
-	for _, ch := range b.subscribers {
-		close(ch)
-	}
+ b.mutex.Lock()
+ defer b.mutex.Unlock()
+ if b.isClosed {
+  return
+ }
+ for _, ch := range b.subscribers {
+  close(ch)
+ }
 }
 
 ```
 
 I'm not gonna provide how i use it on Notifer and Game Manager Components as it is unnecessary and lead to bloated blog but you could use it like this.
+
 ```go {linenos=inline}
 package main
 import (
@@ -136,13 +138,13 @@ func main(){
 
 you may have find similar implimentation from one of my favorite golang youtuber [mario's video](https://youtu.be/s-I3Bs3ZUsY?si=y8RX8SfsbLOjE1o4), and he said this is code is just for demostration purpose only, to show how pub/sub works and you may also notice a couple of defects.
 
- - **The publish method is blocking.** what if one listener is down and stop listening from the channel it subscribe, it will lead to deadlock, this may endure until the buffer is full but it will not last long. when the buffer is full deadlock will happen, as there is lock on the top of the function body. that lock will not be unlocked until the loop is over. the loop got stuck that lead to deadlock of The EventBroker.
+- **The publish method is blocking.** what if one listener is down and stop listening from the channel it subscribe, it will lead to deadlock, this may endure until the buffer is full but it will not last long. when the buffer is full deadlock will happen, as there is lock on the top of the function body. that lock will not be unlocked until the loop is over. the loop got stuck that lead to deadlock of The EventBroker.
 
- - **storing the subscribers in array instead of hashmap** so that the Unsubscribe function have time complexity of n instead of 1. where n is the number of subscribers.
+- **storing the subscribers in array instead of hashmap** so that the Unsubscribe function have time complexity of n instead of 1. where n is the number of subscribers.
 
 ## Let's Address The shortcomings
 
-Let's address the shortcomings of the above implimentation one by one 
+Let's address the shortcomings of the above implimentation one by one
 
 ### The Publish Method
 
@@ -150,16 +152,16 @@ the problem with the publish method is it is blocking if one subscriber stop lis
 
 ```go {linenos=inline}
 func (b *EventBroker) Publish(event domain.GameEvent) {
-	b.mutex.RLock()
-	defer b.mutex.Unlock()
-	if b.isClosed {
-		return
-	}
-	for _, ch := range b.subscribers {
-		go func(c chan domain.GameEvent) {
-			c <- event:
-		}(ch)
-	}
+ b.mutex.RLock()
+ defer b.mutex.Unlock()
+ if b.isClosed {
+  return
+ }
+ for _, ch := range b.subscribers {
+  go func(c chan domain.GameEvent) {
+   c <- event:
+  }(ch)
+ }
 }
 ```
 
@@ -173,67 +175,66 @@ The Solution is simple just like The Great Rob Pike said in this [talk](https://
 
 ```go {linenos=inline}
 func (b *EventBroker) Publish(event domain.GameEvent) {
-	b.mutex.RLock()
-	defer b.mutex.Unlock()
-	if b.isClosed {
-		return
-	}
-	for _, ch := range b.subscribers {
-		go func(c chan domain.GameEvent) {
-			select {
-			case c <- event:
-			default:
-				// drop the event 
-			}
-		}(ch)
-	}
+ b.mutex.RLock()
+ defer b.mutex.Unlock()
+ if b.isClosed {
+  return
+ }
+ for _, ch := range b.subscribers {
+  go func(c chan domain.GameEvent) {
+   select {
+   case c <- event:
+   default:
+    // drop the event 
+   }
+  }(ch)
+ }
 }
 ```
 
 yet there is another defect imagine creating and deleting **n** goroutine for every event that occur where n is the number of subscribers. it will lead to **goroutine churn** where the runtime gonna stress more about creating and deleting short lived goroutines then actualy doing useful jobs.
 
-### Goroutine Churn 
+### Goroutine Churn
 
 so what is the solution? the solution for goroutine churn is to use existing one instead of creating everytime for short lived tasks infact we gonna create one goroutine that will live with the lifetime of the Eventbroker that gonna send events to the subscribers and the publisher's task will be to forward the event to that goroutine. and that comes with restructuring the EventBroker struct, as we need channel that we gonna use to listen events from the publisher and send it to the subscribers, and also i am gonna address the previous data structure issue, we gonna store the subscribers in **hashmap** as we go.
-
 
 ```go {linenos=inline}
 
 type EventBroker struct {
-	subscribers map[chan domain.GameEvent]struct{}
-	mutex       sync.RWMutex
-	events      chan domain.GameEvent
+ subscribers map[chan domain.GameEvent]struct{}
+ mutex       sync.RWMutex
+ events      chan domain.GameEvent
 }
 
 func NewEventBroker() *EventBroker {
-	broker := &EventBroker{
-		subscribers: make(map[chan domain.GameEvent]struct{}, 2),
-		events:      make(chan domain.GameEvent, 20),
-	}
-	go broker.run()
-	return broker
+ broker := &EventBroker{
+  subscribers: make(map[chan domain.GameEvent]struct{}, 2),
+  events:      make(chan domain.GameEvent, 20),
+ }
+ go broker.run()
+ return broker
 }
 
 func (b *EventBroker) run() {
-	for {
-		select {
-		case event := <-b.events:
-			b.mutex.RLock()
-			for ch := range b.subscribers {
-				select {
-				case ch <- event:
-				default:
-					// dropping it  
-				}
-			}
-			b.mutex.RUnlock()
-	}
+ for {
+  select {
+  case event := <-b.events:
+   b.mutex.RLock()
+   for ch := range b.subscribers {
+    select {
+    case ch <- event:
+    default:
+     // dropping it  
+    }
+   }
+   b.mutex.RUnlock()
+ }
 }
 
 func (b *EventBroker) Publish(event domain.GameEvent){
-	b.mutex.RLock()
-	defer b.mutex.RUnlock()
-	b.events <- event
+ b.mutex.RLock()
+ defer b.mutex.RUnlock()
+ b.events <- event
 }
 
 ```
@@ -243,164 +244,163 @@ this look good right? yeah, I know this is a lot of defects to digest but just a
 ```go {linenos=inline}
 
 type EventBroker struct {
-	subscribers map[chan domain.GameEvent]struct{}
-	mutex       sync.RWMutex
-	events      chan domain.GameEvent
+ subscribers map[chan domain.GameEvent]struct{}
+ mutex       sync.RWMutex
+ events      chan domain.GameEvent
   // done channel that gonna be used for signal for destroying the channel
-	done        chan struct{}
+ done        chan struct{}
 }
 
 func NewEventBroker() *EventBroker {
-	broker := &EventBroker{
-		subscribers: make(map[chan domain.GameEvent]struct{}, 2),
-		events:      make(chan domain.GameEvent, 20),
-		done:        make(chan struct{}),
-	}
-	go broker.run()
-	return broker
+ broker := &EventBroker{
+  subscribers: make(map[chan domain.GameEvent]struct{}, 2),
+  events:      make(chan domain.GameEvent, 20),
+  done:        make(chan struct{}),
+ }
+ go broker.run()
+ return broker
 }
 
 func (b *EventBroker) run() {
-	for {
-		select {
-		case event := <-b.events:
-			b.mutex.RLock()
-			for ch := range b.subscribers {
-				select {
-				case ch <- event:
-				default:
-					// drop the event 
-				}
-			}
-			b.mutex.RUnlock()
-		case <-b.done:
-			return
-		}
-	}
+ for {
+  select {
+  case event := <-b.events:
+   b.mutex.RLock()
+   for ch := range b.subscribers {
+    select {
+    case ch <- event:
+    default:
+     // drop the event 
+    }
+   }
+   b.mutex.RUnlock()
+  case <-b.done:
+   return
+  }
+ }
 }
 
 func (b *EventBroker) Close() {
-	close(b.done)
-	b.mutex.Lock()
-	defer b.mutex.Unlock()
-	for ch := range b.subscribers {
-		close(ch)
-	}
-	close(b.events)
+ close(b.done)
+ b.mutex.Lock()
+ defer b.mutex.Unlock()
+ for ch := range b.subscribers {
+  close(ch)
+ }
+ close(b.events)
 }
 
 ```
 
-### Polishing it off 
+### Polishing it off
 
 after i add some custom errors, integrating the new done channel and using the new datastructure ( hashmap ), and preventing closing the same channels more than once by using `sync.Once` ( btw it will lead to panic if you try to close already closed channel ) on our EventBroker methods. our EventBroker looks like this
-
 
 ```go {linenos=inline}
 package events
 
 import (
-	"errors"
-	"sync"
+ "errors"
+ "sync"
 
-	"github.com/kaleabAlemayehu/werewolf/internal/domain"
+ "github.com/kaleabAlemayehu/werewolf/internal/domain"
 )
 
 var (
-	ErrBrokerClosed   = errors.New("Event broker is blocked")
-	ErrUnknownChannel = errors.New("Unknown channel")
+ ErrBrokerClosed   = errors.New("Event broker is blocked")
+ ErrUnknownChannel = errors.New("Unknown channel")
 )
 
 type EventBroker struct {
-	subscribers map[chan domain.GameEvent]struct{}
-	mutex       sync.RWMutex
-	events      chan domain.GameEvent
-	done        chan struct{}
+ subscribers map[chan domain.GameEvent]struct{}
+ mutex       sync.RWMutex
+ events      chan domain.GameEvent
+ done        chan struct{}
   // prevents double closing of the channel
-	closeOnce   sync.Once
+ closeOnce   sync.Once
 }
 
 func NewEventBroker() *EventBroker {
-	broker := &EventBroker{
-		subscribers: make(map[chan domain.GameEvent]struct{}, 2),
-		events:      make(chan domain.GameEvent, 20),
-		done:        make(chan struct{}),
-	}
-	go broker.run()
-	return broker
+ broker := &EventBroker{
+  subscribers: make(map[chan domain.GameEvent]struct{}, 2),
+  events:      make(chan domain.GameEvent, 20),
+  done:        make(chan struct{}),
+ }
+ go broker.run()
+ return broker
 }
 
 func (b *EventBroker) run() {
-	for {
-		select {
-		case event := <-b.events:
-			b.mutex.RLock()
-			for ch := range b.subscribers {
-				select {
-				case ch <- event:
-				default:
-					// drop the evenet 
-				}
-			}
-			b.mutex.RUnlock()
-		case <-b.done:
-			return
-		}
-	}
+ for {
+  select {
+  case event := <-b.events:
+   b.mutex.RLock()
+   for ch := range b.subscribers {
+    select {
+    case ch <- event:
+    default:
+     // drop the evenet 
+    }
+   }
+   b.mutex.RUnlock()
+  case <-b.done:
+   return
+  }
+ }
 }
 
 func (b *EventBroker) Subscribe() (chan domain.GameEvent, error) {
-	b.mutex.Lock()
-	defer b.mutex.Unlock()
-	select {
-	case <-b.done:
-		return nil, ErrBrokerClosed
-	default:
+ b.mutex.Lock()
+ defer b.mutex.Unlock()
+ select {
+ case <-b.done:
+  return nil, ErrBrokerClosed
+ default:
 
-	}
-	ch := make(chan domain.GameEvent, 10)
-	b.subscribers[ch] = struct{}{}
-	return ch, nil
+ }
+ ch := make(chan domain.GameEvent, 10)
+ b.subscribers[ch] = struct{}{}
+ return ch, nil
 }
 
 func (b *EventBroker) Publish(event domain.GameEvent) error {
-	b.mutex.RLock()
-	defer b.mutex.RUnlock()
-	select {
-	case <-b.done:
-		return ErrBrokerClosed
-	default:
-		b.events <- event
-		return nil
-	}
+ b.mutex.RLock()
+ defer b.mutex.RUnlock()
+ select {
+ case <-b.done:
+  return ErrBrokerClosed
+ default:
+  b.events <- event
+  return nil
+ }
 }
 
 func (b *EventBroker) Unsubscribe(ch chan domain.GameEvent) error {
-	b.mutex.Lock()
-	defer b.mutex.Unlock()
-	if _, ok := b.subscribers[ch]; ok {
-		delete(b.subscribers, ch)
-		close(ch)
-		return nil
-	}
-	return ErrUnknownChannel
+ b.mutex.Lock()
+ defer b.mutex.Unlock()
+ if _, ok := b.subscribers[ch]; ok {
+  delete(b.subscribers, ch)
+  close(ch)
+  return nil
+ }
+ return ErrUnknownChannel
 }
 
 func (b *EventBroker) Close() {
-	b.closeOnce.Do(func() {
-		close(b.done)
-		b.mutex.Lock()
-		defer b.mutex.Unlock()
-		for ch := range b.subscribers {
-			close(ch)
-		}
-		close(b.events)
-	})
+ b.closeOnce.Do(func() {
+  close(b.done)
+  b.mutex.Lock()
+  defer b.mutex.Unlock()
+  for ch := range b.subscribers {
+   close(ch)
+  }
+  close(b.events)
+ })
 
 }
 
 ```
 
-## Conclusion 
+## Conclusion
 
 Here we are at the end of my blog on the publisher/subscriber concurrency pattern, where I walked through how I built the event broker I use for my Werewolf Telegram bot. If you have any suggestions or better ways of doing things, I’d love to hear from you, I’m always open to learning, as Helmut Schmidt said, 'The largest room in the world is the room for improvement.' Since this is my first blog, I want to sincerely thank you for reading. See you in the next one!

@@ -95,3 +95,15 @@ pre > code,
 pre {
   overflow-x: auto;
 }
+
+article a {
+  color: #00e639 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #00e639 !important;
+  text-underline-offset: 3px;
+  transition: all 0.15s ease;
+}
+article a:hover {
+  color: #00ff41 !important;
+  text-shadow: 0 0 8px #00e639, 0 0 16px #00e639;
+}
