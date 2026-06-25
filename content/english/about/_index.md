@@ -3,7 +3,7 @@ title: "Kaleab Alemayehu"
 meta_title: "About"
 route: "About Me"
 work: "Software Engineer"
-resume: "https://raw.githubusercontent.com/kaleabAlemayehu/resume/master/resume.pdf"
+resume: "https://raw.githubusercontent.com/kaleabAlemayehu/resume/master/Kaleab_Alemayehu_Resume.pdf"
 description: "this is meta description"
 image: "/images/avatar.png"
 draft: false
